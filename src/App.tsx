@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Header from "./Components/Header/Header";
+import Footer from "./Components/Footer/Footer";
+import PropertyGrid from "./Components/ PropertyGrid/ PropertyGrid";
+import StockRecord from "./Components/StockRecord/StockRecord";
+import SalesBox from "./Components/SalesBox/SalesBox";
+import Sales from "./Components/Sales/Sales";
 
-function App() {
+const App: React.FC = () => {
+  const [currentView, setCurrentView] = useState<"PropertyGrid" | "StockRecord" | "SalesBox" | "Sales" | "Report" | "Help">("PropertyGrid");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="d-flex flex-column min-vh-100">
+      <Header onNavigate={(view) => setCurrentView(view)} />
+      <main className="flex-grow-1 container mt-4">
+        {currentView === "PropertyGrid" && <PropertyGrid onNavigate={(view) => setCurrentView(view)} />}
+        {currentView === "StockRecord" && <StockRecord />}
+        {currentView === "SalesBox" && <SalesBox />}
+        {currentView === "Sales" && <Sales />}
+        {/* Outros componentes podem ser adicionados aqui conforme implementados */}
+      </main>
+      <Footer onNavigate={(view) => setCurrentView(view)} />
     </div>
   );
-}
+};
 
 export default App;
