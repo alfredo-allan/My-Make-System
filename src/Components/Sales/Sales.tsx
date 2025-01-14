@@ -1,61 +1,59 @@
-import React, { useState } from "react";
-
-interface Sale {
-    id: number;
-    description: string;
-    amount: number;
-    date: string;
-}
+import React, { useState, useEffect } from "react";
+import { getSalesAndExpenses, closeCashRegister } from "./api";
 
 const Sales: React.FC = () => {
-    const [sales, setSales] = useState<Sale[]>([
-        { id: 1, description: "Venda 1", amount: 150.0, date: "2025-01-08" },
-        { id: 2, description: "Venda 2", amount: 300.0, date: "2025-01-08" },
-    ]);
-
-    const [expense, setExpense] = useState({ description: "", amount: "", date: "" });
+    const [sales, setSales] = useState([]);
+    const [expenses, setExpenses] = useState([]);
     const [filterDate, setFilterDate] = useState("");
+    const [totals, setTotals] = useState({ sales: 0, expenses: 0, profit: 0 });
 
-    // Lida com mudanças nos campos de input
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setExpense((prev) => ({ ...prev, [name]: value }));
-    };
+    // Busca vendas e despesas ao alterar a data
+    useEffect(() => {
+        if (filterDate) {
+            getSalesAndExpenses(filterDate)
+                .then(({ sales, expenses }) => {
+                    setSales(sales);
+                    setExpenses(expenses);
 
-    // Adiciona uma nova despesa à lista
-    const addExpense = () => {
-        if (!expense.description || !expense.amount || !expense.date) {
-            alert("Preencha todos os campos antes de adicionar a despesa.");
+                    // Calcula totais
+                    const totalSales = sales.reduce((sum: number, item: any) => sum + item.amount, 0);
+                    const totalExpenses = expenses.reduce((sum: number, item: any) => sum + item.amount, 0);
+                    setTotals({ sales: totalSales, expenses: totalExpenses, profit: totalSales - totalExpenses });
+                })
+                .catch((error) => {
+                    console.error("Erro ao carregar dados:", error);
+                });
+        }
+    }, [filterDate]);
+
+    // Fecha o caixa
+    const handleCloseCashRegister = () => {
+        if (!filterDate) {
+            alert("Selecione uma data para fechar o caixa.");
             return;
         }
 
-        const newSale: Sale = {
-            id: sales.length + 1,
-            description: expense.description,
-            amount: parseFloat(expense.amount),
-            date: expense.date,
-        };
-
-        setSales((prevSales) => [...prevSales, newSale]);
-        setExpense({ description: "", amount: "", date: "" });
+        closeCashRegister({
+            date: filterDate,
+            totalSales: totals.sales,
+            totalExpenses: totals.expenses,
+            profit: totals.profit,
+        })
+            .then(() => alert("Caixa fechado com sucesso!"))
+            .catch(() => alert("Erro ao fechar o caixa."));
     };
-
-    // Filtra vendas/despesas pela data
-    const filteredSales = filterDate
-        ? sales.filter((sale) => sale.date === filterDate)
-        : sales;
 
     return (
         <div className="container my-4">
             <div className="card">
                 <div className="card-header">
-                    <h5 className="card-title mb-0">Lista de Vendas e Despesas</h5>
+                    <h5 className="card-title mb-0">Fechamento de Caixa</h5>
                 </div>
                 <div className="card-body">
                     {/* Filtro por Data */}
                     <div className="mb-3">
                         <label htmlFor="filterDate" className="form-label">
-                            Filtrar por Data <i className="bi bi-calendar ms-2 text-muted"></i>
+                            Filtrar por Data
                         </label>
                         <input
                             type="date"
@@ -67,72 +65,37 @@ const Sales: React.FC = () => {
                     </div>
 
                     {/* Lista de Vendas */}
-                    <h6>Registros</h6>
-                    <ul className="list-group mb-4">
-                        {filteredSales.length > 0 ? (
-                            filteredSales.map((sale) => (
-                                <li key={sale.id} className="list-group-item d-flex justify-content-between align-items-center">
-                                    <span>
-                                        <strong>{sale.description}</strong> <br />
-                                        Data: {sale.date}
-                                    </span>
-                                    <span className="badge bg-primary rounded-pill">
-                                        R$ {sale.amount.toFixed(2)}
-                                    </span>
-                                </li>
-                            ))
-                        ) : (
-                            <li className="list-group-item">Nenhum registro encontrado para a data selecionada.</li>
-                        )}
+                    <h6>Vendas</h6>
+                    <ul className="list-group mb-3">
+                        {sales.map((sale: any) => (
+                            <li key={sale.id} className="list-group-item d-flex justify-content-between">
+                                <span>{sale.description}</span>
+                                <span className="badge bg-success">R$ {sale.amount.toFixed(2)}</span>
+                            </li>
+                        ))}
                     </ul>
 
-                    {/* Adicionar Despesa */}
-                    <h6>Adicionar Despesa</h6>
-                    <div className="row g-3">
-                        <div className="col-md-6">
-                            <label htmlFor="description" className="form-label">
-                                Descrição <i className="bi bi-pencil ms-2 text-muted"></i>
-                            </label>
-                            <input
-                                type="text"
-                                id="description"
-                                name="description"
-                                className="form-control"
-                                placeholder="Ex.: Compra de material"
-                                value={expense.description}
-                                onChange={handleInputChange}
-                            />
-                        </div>
-                        <div className="col-md-3">
-                            <label htmlFor="amount" className="form-label">
-                                Valor (R$) <i className="bi bi-currency-dollar ms-2 text-muted"></i>
-                            </label>
-                            <input
-                                type="number"
-                                id="amount"
-                                name="amount"
-                                className="form-control"
-                                placeholder="Ex.: 120.00"
-                                value={expense.amount}
-                                onChange={handleInputChange}
-                            />
-                        </div>
-                        <div className="col-md-3">
-                            <label htmlFor="date" className="form-label">
-                                Data <i className="bi bi-calendar-date ms-2 text-muted"></i>
-                            </label>
-                            <input
-                                type="date"
-                                id="date"
-                                name="date"
-                                className="form-control"
-                                value={expense.date}
-                                onChange={handleInputChange}
-                            />
-                        </div>
+                    {/* Lista de Despesas */}
+                    <h6>Despesas</h6>
+                    <ul className="list-group mb-3">
+                        {expenses.map((expense: any) => (
+                            <li key={expense.id} className="list-group-item d-flex justify-content-between">
+                                <span>{expense.description}</span>
+                                <span className="badge bg-danger">R$ {expense.amount.toFixed(2)}</span>
+                            </li>
+                        ))}
+                    </ul>
+
+                    {/* Totais */}
+                    <div className="mb-3">
+                        <p><strong>Total de Vendas:</strong> R$ {totals.sales.toFixed(2)}</p>
+                        <p><strong>Total de Despesas:</strong> R$ {totals.expenses.toFixed(2)}</p>
+                        <p><strong>Lucro:</strong> R$ {totals.profit.toFixed(2)}</p>
                     </div>
-                    <button className="btn btn-success mt-3" onClick={addExpense}>
-                        Adicionar
+
+                    {/* Botão para fechar o caixa */}
+                    <button className="btn btn-primary" onClick={handleCloseCashRegister}>
+                        Fechar Caixa
                     </button>
                 </div>
             </div>
