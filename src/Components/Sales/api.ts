@@ -1,36 +1,33 @@
 import axios from "axios";
 
-// Configuração do Axios
+export const API_BASE_URL = "http://127.0.0.1:8000";
 
-const api = axios.create({
-  baseURL: "http://10.0.0.108:8000", // Atualize conforme necessário
-});
+// Tipos
+export interface Item {
+  descricao: string;
+  id: number;
+  item_codigo: string;
+  quantidade: number;
+  valor_total: number;
+  valor_unitario: number;
+  venda_id: number;
+}
 
-// Obter vendas e despesas por data
-export const getSalesAndExpenses = async (date: string) => {
+export interface Venda {
+  data_venda: string;
+  id: number;
+  itens: Item[];
+  operador: string;
+  valor_total: number;
+}
+
+// Função para buscar todas as vendas
+export const fetchVendas = async (): Promise<Venda[]> => {
   try {
-    const response = await api.get(`/finance?date=${date}`); // Supondo que a rota seja `/finance`
-    return response.data; // Formato esperado: { sales: [...], expenses: [...] }
-  } catch (error) {
-    console.error("Erro ao buscar vendas e despesas:", error);
-    throw error;
+    const response = await axios.get(`${API_BASE_URL}/vendas`);
+    return response.data;
+  } catch (err) {
+    console.error("Erro ao buscar vendas:", err);
+    throw err; // Propaga o erro para ser tratado no componente
   }
 };
-
-// Fechar o caixa (opcional)
-export const closeCashRegister = async (data: {
-  date: string;
-  totalSales: number;
-  totalExpenses: number;
-  profit: number;
-}) => {
-  try {
-    const response = await api.post("/close-cash", data);
-    return response.data; // Resposta esperada
-  } catch (error) {
-    console.error("Erro ao fechar o caixa:", error);
-    throw error;
-  }
-};
-
-export default api;
