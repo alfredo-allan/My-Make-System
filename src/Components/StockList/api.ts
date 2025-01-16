@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://127.0.0.1:8000";
+const API_BASE_URL = "https://supermarketapp25.pythonanywhere.com";
 
 // Função para buscar todos os itens do estoque
 export const fetchAllStockItems = async (): Promise<any[]> => {

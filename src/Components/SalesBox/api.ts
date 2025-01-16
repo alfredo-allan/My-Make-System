@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Configuração do Axios
 const api = axios.create({
-  baseURL: "http://10.0.0.108:8000", // Atualize com o endereço do backend
+  baseURL: "https://supermarketapp25.pythonanywhere.com", // Atualize com o endereço do backend
 });
 
 // Função para buscar a descrição do produto pelo código

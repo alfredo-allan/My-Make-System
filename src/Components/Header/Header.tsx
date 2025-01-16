@@ -79,7 +79,7 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
                                 Relatório
                             </a>
                         </li>
-                        {/* <li className="nav-item">
+                        <li className="nav-item">
                             <a
                                 className="nav-link"
                                 href="#"
@@ -90,7 +90,7 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
                             >
                                 Ajuda
                             </a>
-                        </li> */}
+                        </li>
                     </ul>
                 </div>
             </div>

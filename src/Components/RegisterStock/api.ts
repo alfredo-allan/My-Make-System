@@ -6,7 +6,10 @@ export const createOrUpdateEstoque = async (data: {
   item_codigo: string;
 }) => {
   try {
-    const response = await axios.post("http://127.0.0.1:8000/estoque", data);
+    const response = await axios.post(
+      "https://supermarketapp25.pythonanywhere.com/estoque",
+      data
+    );
     return response.data;
   } catch (error) {
     throw new Error("Erro ao registrar/atualizar estoque");

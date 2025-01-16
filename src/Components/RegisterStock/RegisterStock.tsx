@@ -21,7 +21,7 @@ const RegisterStock: React.FC<RegisterStockProps> = ({ onBack }) => {
     // Função para consultar a existência do item
     const checkItemExists = async (itemCode: string) => {
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/items`);
+            const response = await axios.get(`https://supermarketapp25.pythonanywhere.com/items`);
             // Verifica se o código do item está na resposta
             const item = response.data.find((item: any) => item.codigo === itemCode);
 
@@ -56,7 +56,7 @@ const RegisterStock: React.FC<RegisterStockProps> = ({ onBack }) => {
         }
 
         try {
-            const response = await axios.post("http://127.0.0.1:8000/estoque", {
+            const response = await axios.post("https://supermarketapp25.pythonanywhere.com/estoque", {
                 operador: formData.operatorName,
                 quantidade: formData.quantity,
                 item_codigo: formData.productCode,

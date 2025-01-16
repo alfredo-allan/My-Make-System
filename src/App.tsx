@@ -6,6 +6,8 @@ import StockRecord from "./Components/StockRecord/StockRecord";
 import SalesBox from "./Components/SalesBox/SalesBox";
 import Sales from "./Components/Sales/Sales";
 import Report from "./Components/Report/Report";
+import Help from "./Components/HelpPage/HelpPage";
+
 
 
 const App: React.FC = () => {
@@ -20,6 +22,7 @@ const App: React.FC = () => {
         {currentView === "SalesBox" && <SalesBox />}
         {currentView === "Sales" && <Sales />}
         {currentView === "Report" && <Report />}
+        {currentView === "Help" && <Help />}
 
         {/* Outros componentes podem ser adicionados aqui conforme implementados */}
       </main>
