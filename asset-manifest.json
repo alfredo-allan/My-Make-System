@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/My-Make-System/static/css/main.e6c13ad2.css",
-    "main.js": "/My-Make-System/static/js/main.04b0c930.js",
+    "main.js": "/My-Make-System/static/js/main.81d593b6.js",
     "static/js/453.917aebf9.chunk.js": "/My-Make-System/static/js/453.917aebf9.chunk.js",
     "static/media/stock.png": "/My-Make-System/static/media/stock.9a457772c109a3520993.png",
     "static/media/sales.png": "/My-Make-System/static/media/sales.8305bf3b2ba4037420bc.png",
@@ -9,11 +9,11 @@
     "static/media/point-of-sale.png": "/My-Make-System/static/media/point-of-sale.c2c7d29b94212b4ee000.png",
     "index.html": "/My-Make-System/index.html",
     "main.e6c13ad2.css.map": "/My-Make-System/static/css/main.e6c13ad2.css.map",
-    "main.04b0c930.js.map": "/My-Make-System/static/js/main.04b0c930.js.map",
+    "main.81d593b6.js.map": "/My-Make-System/static/js/main.81d593b6.js.map",
     "453.917aebf9.chunk.js.map": "/My-Make-System/static/js/453.917aebf9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.04b0c930.js"
+    "static/js/main.81d593b6.js"
   ]
 }
