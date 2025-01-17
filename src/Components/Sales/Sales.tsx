@@ -78,32 +78,34 @@ const SalesReport: React.FC = () => {
                         {filteredVendas.length > 0 ? (
                             <>
                                 <h4>Total de Vendas: R$ {totalValue.toFixed(2)}</h4>
-                                <table className="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Descrição</th>
-                                            <th>Código do Item</th>
-                                            <th>Quantidade</th>
-                                            <th>Valor Unitário</th>
-                                            <th>Valor Total</th>
-                                            <th>Operador</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {filteredVendas.map((venda) =>
-                                            venda.itens.map((item) => (
-                                                <tr key={item.id}>
-                                                    <td>{item.descricao}</td>
-                                                    <td>{item.item_codigo}</td>
-                                                    <td>{item.quantidade}</td>
-                                                    <td>R$ {item.valor_unitario.toFixed(2)}</td>
-                                                    <td>R$ {item.valor_total.toFixed(2)}</td>
-                                                    <td>{venda.operador}</td>
-                                                </tr>
-                                            ))
-                                        )}
-                                    </tbody>
-                                </table>
+                                <div className="table-responsive">
+                                    <table className="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Descrição</th>
+                                                <th>Código do Item</th>
+                                                <th>Quantidade</th>
+                                                <th>Valor Unitário</th>
+                                                <th>Valor Total</th>
+                                                <th>Operador</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {filteredVendas.map((venda) =>
+                                                venda.itens.map((item) => (
+                                                    <tr key={item.id}>
+                                                        <td>{item.descricao}</td>
+                                                        <td>{item.item_codigo}</td>
+                                                        <td>{item.quantidade}</td>
+                                                        <td>R$ {item.valor_unitario.toFixed(2)}</td>
+                                                        <td>R$ {item.valor_total.toFixed(2)}</td>
+                                                        <td>{venda.operador}</td>
+                                                    </tr>
+                                                ))
+                                            )}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </>
                         ) : (
                             <p className="text-center">Nenhuma venda encontrada para a data selecionada.</p>

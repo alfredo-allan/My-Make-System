@@ -25,9 +25,8 @@ const Report: React.FC = () => {
             setError(null);
             try {
                 const data = await fetchLogs();
-                console.log("Dados recebidos da API:", data);
                 setLogs(data);
-                setFilteredLogs(data); // Inicialmente exibe todos os logs
+                setFilteredLogs(data);
             } catch (err) {
                 console.error("Erro ao carregar logs:", err);
                 setError("Não foi possível carregar os logs.");
@@ -133,34 +132,36 @@ const Report: React.FC = () => {
                             </button>
                         </div>
                         {filteredLogs.length > 0 ? (
-                            <table className="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Data da Operação</th>
-                                        <th>Código do Item</th>
-                                        <th>Quantidade Alterada</th>
-                                        <th>Tipo de Operação</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {filteredLogs.map((log) => (
-                                        <tr key={log.id}>
-                                            <td>{log.id}</td>
-                                            <td>{new Date(log.data_operacao).toLocaleString()}</td>
-                                            <td>{log.item_codigo}</td>
-                                            <td>{log.quantidade_alterada}</td>
-                                            <td>
-                                                {log.tipo_operacao === "POST"
-                                                    ? "Entrada"
-                                                    : log.tipo_operacao === "DELETE"
-                                                        ? "Saída"
-                                                        : log.tipo_operacao}
-                                            </td>
+                            <div className="table-responsive">
+                                <table className="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Data da Operação</th>
+                                            <th>Código do Item</th>
+                                            <th>Quantidade</th>
+                                            <th>Operação</th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        {filteredLogs.map((log) => (
+                                            <tr key={log.id}>
+                                                <td>{log.id}</td>
+                                                <td>{new Date(log.data_operacao).toLocaleString()}</td>
+                                                <td>{log.item_codigo}</td>
+                                                <td>{log.quantidade_alterada}</td>
+                                                <td>
+                                                    {log.tipo_operacao === "POST"
+                                                        ? "Entrada"
+                                                        : log.tipo_operacao === "DELETE"
+                                                            ? "Saída"
+                                                            : log.tipo_operacao}
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
                         ) : (
                             <p className="text-center">Nenhum log encontrado.</p>
                         )}

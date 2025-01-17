@@ -12,7 +12,6 @@ type StockItem = {
     data_operacao: string;
 };
 
-
 type StockListProps = {
     onBack: () => void;
 };
@@ -44,7 +43,6 @@ const StockList: React.FC<StockListProps> = ({ onBack }) => {
         loadStockItems();
     }, []);
 
-
     useEffect(() => {
         if (filterCode.trim() === "") {
             setFilteredItems(stockItems);
@@ -55,7 +53,6 @@ const StockList: React.FC<StockListProps> = ({ onBack }) => {
             setFilteredItems(filtered);
         }
     }, [filterCode, stockItems]);
-
 
     return (
         <div className="card">
@@ -83,26 +80,28 @@ const StockList: React.FC<StockListProps> = ({ onBack }) => {
                             />
                         </div>
                         {filteredItems.length > 0 ? (
-                            <table className="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Código</th>
-                                        <th>Descrição</th>
-                                        <th>Quantidade</th>
-                                        <th>Operador</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {filteredItems.map((item) => (
-                                        <tr key={item.id}>
-                                            <td>{item.item?.codigo || "N/A"}</td>
-                                            <td>{item.item?.descricao || "Descrição indisponível"}</td>
-                                            <td>{item.quantidade ?? 0}</td>
-                                            <td>{item.operador || "N/A"}</td>
+                            <div className="table-responsive">
+                                <table className="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Código</th>
+                                            <th>Descrição</th>
+                                            <th>Quantidade</th>
+                                            <th>Operador</th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        {filteredItems.map((item) => (
+                                            <tr key={item.id}>
+                                                <td>{item.item?.codigo || "N/A"}</td>
+                                                <td>{item.item?.descricao || "Descrição indisponível"}</td>
+                                                <td>{item.quantidade ?? 0}</td>
+                                                <td>{item.operador || "N/A"}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
                         ) : (
                             <p className="text-center">Nenhum item encontrado.</p>
                         )}
