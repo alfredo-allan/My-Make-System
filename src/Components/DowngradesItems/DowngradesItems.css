@@ -1,0 +1,11 @@
+@media (max-width: 768px) {
+    .container.my-4 {
+        img {
+            width: 50%;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            margin: 15px 77px;
+        }
+    }
+}

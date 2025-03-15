@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { fetchItemIdByCode, deleteStock } from "./api";
-
+import './DowngradesItems.css'
 interface DowngradesItensProps {
     onBack: () => void;
 }
