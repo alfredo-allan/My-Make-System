@@ -16,7 +16,7 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
                         onNavigate("PropertyGrid"); // Navega para a página inicial
                     }}
                 >
-                    My-Make-System
+                    Leap In Technology ©
                 </a>
                 <button
                     className="navbar-toggler"
