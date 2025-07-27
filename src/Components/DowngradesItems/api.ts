@@ -5,7 +5,7 @@ export const deleteStock = async (
   dataOperacao: string
 ): Promise<void> => {
   try {
-    const response = await fetch(`http://localhost:5000/estoque/${estoqueId}`, {
+    const response = await fetch(`https://supermarketapp25.pythonanywhere.com/estoque/${estoqueId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ interface EstoqueItem {
 export const fetchEstoqueIdByItemCode = async (itemCode: string): Promise<number | null> => {
   try {
     // Busca todos os registros de estoque
-    const response = await fetch('http://localhost:5000/estoque/');
+    const response = await fetch('https://supermarketapp25.pythonanywhere.com/estoque/');
 
     if (!response.ok) {
       console.error('Resposta HTTP não ok:', response.status, response.statusText);

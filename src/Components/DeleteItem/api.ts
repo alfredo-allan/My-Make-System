@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:5000"; // ou sua URL pública se for prod
+const API_BASE_URL = "https://supermarketapp25.pythonanywhere.com"; // ou sua URL pública se for prod
 
 // Interface para o objeto Estoque retornado pela API
 interface EstoqueItem {
