@@ -47,7 +47,6 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://alfredo-allan.github.io/My-Make-System",
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/http-proxy-middleware": "^1.0.0"
