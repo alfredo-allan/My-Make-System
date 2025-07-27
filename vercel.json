@@ -1,11 +1,10 @@
 {
     "buildCommand": "yarn build",
-    "outputDirectory": "dist",
-    "framework": null,
+    "outputDirectory": "build",
     "rewrites": [
         {
             "source": "/(.*)",
-            "destination": "/"
+            "destination": "/index.html"
         }
     ]
 }

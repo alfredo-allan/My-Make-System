@@ -1,0 +1,40 @@
+.
+├── README.md
+├── estrutura.txt
+├── package.json
+├── public
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── manifest.json
+│   └── robots.txt
+├── src
+│   ├── App.css
+│   ├── App.test.tsx
+│   ├── App.tsx
+│   ├── Assets
+│   │   └── Img
+│   ├── Components
+│   │   ├──  PropertyGrid
+│   │   ├── DeleteItem
+│   │   ├── DowngradesItems
+│   │   ├── Footer
+│   │   ├── Header
+│   │   ├── HelpPage
+│   │   ├── RegisterItem
+│   │   ├── RegisterStock
+│   │   ├── Report
+│   │   ├── Sales
+│   │   ├── SalesBox
+│   │   ├── StockList
+│   │   └── StockRecord
+│   ├── index.css
+│   ├── index.tsx
+│   ├── logo.svg
+│   ├── react-app-env.d.ts
+│   ├── reportWebVitals.ts
+│   └── setupTests.ts
+├── tsconfig.json
+├── vercel.json
+└── yarn.lock
+
+19 directories, 19 files
