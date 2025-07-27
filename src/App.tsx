@@ -15,7 +15,7 @@ const App: React.FC = () => {
 
   return (
     <div className="d-flex flex-column min-vh-100">
-      <Header onNavigate={(view) => setCurrentView(view)} />
+      <Header currentView={currentView} onNavigate={(view) => setCurrentView(view)} />
       <main className="flex-grow-1 container mt-4">
         {currentView === "PropertyGrid" && <PropertyGrid onNavigate={(view) => setCurrentView(view)} />}
         {currentView === "StockRecord" && <StockRecord />}

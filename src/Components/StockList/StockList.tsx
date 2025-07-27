@@ -30,8 +30,19 @@ const StockList: React.FC<StockListProps> = ({ onBack }) => {
             try {
                 const data = await fetchAllStockItems();
                 console.log("Dados recebidos da API:", data);
-                setStockItems(data);
-                setFilteredItems(data);
+                const formatted = data.map((item: any) => ({
+                    id: item.id,
+                    item: {
+                        codigo: item.item_codigo,
+                        descricao: item.item_descricao,
+                    },
+                    quantidade: item.quantidade,
+                    operador: item.operador,
+                    data_operacao: item.created_at,
+                }));
+
+                setStockItems(formatted);
+                setFilteredItems(formatted);
             } catch (err) {
                 console.error("Erro ao carregar itens do estoque:", err);
                 setError("Não foi possível carregar os itens do estoque.");

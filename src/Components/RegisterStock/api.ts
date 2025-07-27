@@ -7,7 +7,7 @@ export const createOrUpdateEstoque = async (data: {
 }) => {
   try {
     const response = await axios.post(
-      "https://supermarketapp25.pythonanywhere.com/estoque",
+      " http://localhost:5000/estoque",
       data
     );
     return response.data;

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://supermarketapp25.pythonanywhere.com";
+const API_URL = " http://localhost:5000";
 
 interface ItemData {
   codigo: string;

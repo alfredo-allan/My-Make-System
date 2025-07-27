@@ -2,18 +2,21 @@ import React, { useState } from "react";
 import RegisterStock from "../RegisterStock/RegisterStock";
 import RegisterItem from "../RegisterItem/RegisterItem";
 import StockList from "../StockList/StockList";
-import DowngradesItems from "../DowngradesItems/DowngradesItems"; // Import do novo componente
+import DowngradesItems from "../DowngradesItems/DowngradesItems";
+import DeleteItem from "../DeleteItem/DeleteItem"; // Novo componente a ser criado
 
 const StockRecord: React.FC = () => {
-    const [view, setView] = useState<"cards" | "register" | "list" | "registerItem" | "downgrades">("cards");
+    const [view, setView] = useState<
+        "cards" | "register" | "list" | "registerItem" | "downgrades" | "deleteItem"
+    >("cards");
 
     const handleItemSubmit = (data: { productCode: string; productDescription: string; price: number }) => {
         console.log("Dados enviados:", data);
-        setView("cards"); // Voltar para os cards após salvar
+        setView("cards");
     };
 
     return (
-        <div className="container my-4">
+        <div className="container my-4" style={{ cursor: 'pointer' }}>
             {/* Cards de Ações */}
             {view === "cards" && (
                 <div className="row justify-content-center">
@@ -49,6 +52,18 @@ const StockRecord: React.FC = () => {
                             </div>
                         </div>
                     </div>
+                    <div className="col-lg-4 mb-4">
+                        <div
+                            className="card text-center h-100 bg-danger text-white"
+                            onClick={() => setView("deleteItem")}
+                            style={{ cursor: "pointer" }}
+                        >
+                            <div className="card-body">
+                                <i className="bi bi-box-seam" style={{ fontSize: "3rem" }}></i>
+                                <h5 className="card-title mt-3">Apagar Item</h5>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             )}
 
@@ -59,6 +74,7 @@ const StockRecord: React.FC = () => {
                 <RegisterItem onBack={() => setView("cards")} onSubmit={handleItemSubmit} />
             )}
             {view === "downgrades" && <DowngradesItems onBack={() => setView("cards")} />}
+            {view === "deleteItem" && <DeleteItem onBack={() => setView("cards")} />}
         </div>
     );
 };

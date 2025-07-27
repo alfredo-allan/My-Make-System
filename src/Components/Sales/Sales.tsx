@@ -9,6 +9,23 @@ const SalesReport: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 
+    // Função para formatar valores em Real brasileiro
+    const formatCurrency = (value: number): string => {
+        return value.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        });
+    };
+
+    // Função específica para valores que precisam ser divididos por 10
+    const formatCurrencyDivided = (value: number): string => {
+        const realValue = value / 10;
+        return realValue.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        });
+    };
+
     useEffect(() => {
         const fetchAllSales = async () => {
             setLoading(true);
@@ -49,7 +66,7 @@ const SalesReport: React.FC = () => {
     };
 
     return (
-        <div className="card">
+        <div className="card" style={{ cursor: 'pointer' }}>
             <div className="card-header">
                 <h5 className="card-title mb-0">Relatório de Vendas</h5>
             </div>
@@ -77,7 +94,9 @@ const SalesReport: React.FC = () => {
 
                         {filteredVendas.length > 0 ? (
                             <>
-                                <h4>Total de Vendas: R$ {totalValue.toFixed(2)}</h4>
+                                <h4 className="text-success mb-3">
+                                    Total de Vendas: {formatCurrencyDivided(totalValue)}
+                                </h4>
                                 <div className="table-responsive">
                                     <table className="table table-striped">
                                         <thead>
@@ -97,8 +116,8 @@ const SalesReport: React.FC = () => {
                                                         <td>{item.descricao}</td>
                                                         <td>{item.item_codigo}</td>
                                                         <td>{item.quantidade}</td>
-                                                        <td>R$ {item.valor_unitario.toFixed(2)}</td>
-                                                        <td>R$ {item.valor_total.toFixed(2)}</td>
+                                                        <td>{formatCurrency(item.valor_unitario)}</td>
+                                                        <td className="fw-bold">{formatCurrencyDivided(item.valor_total)}</td>
                                                         <td>{venda.operador}</td>
                                                     </tr>
                                                 ))

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { fetchItemIdByCode, deleteStock } from "./api";
+import { fetchEstoqueIdByItemCode, deleteStock } from "./api";
 import './DowngradesItems.css'
 interface DowngradesItensProps {
     onBack: () => void;
@@ -24,7 +24,7 @@ const DowngradesItens: React.FC<DowngradesItensProps> = ({ onBack }) => {
         setFormData({ ...formData, [name]: value });
 
         if (name === "productCode") {
-            const fetchedId = await fetchItemIdByCode(value.trim());
+            const fetchedId = await fetchEstoqueIdByItemCode(value.trim());
             if (fetchedId !== null) {
                 setItemId(fetchedId);
                 setItemFound(true);
@@ -36,6 +36,7 @@ const DowngradesItens: React.FC<DowngradesItensProps> = ({ onBack }) => {
             }
         }
     };
+
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();

@@ -13,6 +13,7 @@ const HelpPage: React.FC = () => {
                         <Card.Header>Estoque</Card.Header>
                         <Card.Body>
                             <p><strong>Criar Item:</strong> Registre um novo item no estoque.</p>
+                            <p><strong>Deletar Item:</strong> Deletar um Item e Todo Seu Registro Dentro do Sistema</p>
                             <p><strong>Atualizar Quantidade:</strong> Altere a quantidade de um item.</p>
                             <p><strong>Baixar Estoque:</strong> Diminua o estoque de um item.</p>
                             <p><strong>Log de Operações:</strong> O operador será registrado a cada alteração.</p>

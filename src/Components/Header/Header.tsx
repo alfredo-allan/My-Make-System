@@ -1,23 +1,21 @@
 import React from "react";
 
 interface HeaderProps {
+    currentView: "PropertyGrid" | "StockRecord" | "SalesBox" | "Sales" | "Report" | "Help";
     onNavigate: (view: "PropertyGrid" | "StockRecord" | "SalesBox" | "Sales" | "Report" | "Help") => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
+const Header: React.FC<HeaderProps> = ({ currentView, onNavigate }) => {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
-                <a
-                    className="navbar-brand"
-                    href="#"
-                    onClick={(e) => {
-                        e.preventDefault(); // Evita recarregamento da página
-                        onNavigate("PropertyGrid"); // Navega para a página inicial
-                    }}
+                <button
+                    className="navbar-brand bg-transparent border-0 text-light"
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => onNavigate("PropertyGrid")}
                 >
                     Leap In Technology ©
-                </a>
+                </button>
                 <button
                     className="navbar-toggler"
                     type="button"
@@ -32,64 +30,79 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav me-auto">
                         <li className="nav-item">
-                            <a
-                                className="nav-link active"
-                                href="#"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    onNavigate("StockRecord"); // Navega para o componente Estoque
+                            <button
+                                className={`nav-link bg-transparent border-0 ${currentView === "StockRecord" ? "active" : ""
+                                    }`}
+                                style={{
+                                    cursor: 'pointer',
+                                    backgroundColor: currentView === "StockRecord" ? 'rgba(255, 255, 255, 0.25)' : 'transparent',
+                                    borderRadius: '4px',
+                                    border: currentView === "StockRecord" ? '1px solid rgba(255, 255, 255, 0.3)' : '1px solid transparent'
                                 }}
+                                onClick={() => onNavigate("StockRecord")}
                             >
                                 Estoque
-                            </a>
+                            </button>
                         </li>
                         <li className="nav-item">
-                            <a
-                                className="nav-link"
-                                href="#"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    onNavigate("SalesBox"); // Navegação para Caixa PDV (não implementado ainda)
+                            <button
+                                className={`nav-link bg-transparent border-0 ${currentView === "SalesBox" ? "active" : ""
+                                    }`}
+                                style={{
+                                    cursor: 'pointer',
+                                    backgroundColor: currentView === "SalesBox" ? 'rgba(255, 255, 255, 0.25)' : 'transparent',
+                                    borderRadius: '4px',
+                                    border: currentView === "SalesBox" ? '1px solid rgba(255, 255, 255, 0.3)' : '1px solid transparent'
                                 }}
+                                onClick={() => onNavigate("SalesBox")}
                             >
                                 Caixa PDV
-                            </a>
+                            </button>
                         </li>
                         <li className="nav-item">
-                            <a
-                                className="nav-link"
-                                href="#"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    onNavigate("Sales"); // Navegação para Caixa (não implementado ainda)
+                            <button
+                                className={`nav-link bg-transparent border-0 ${currentView === "Sales" ? "active" : ""
+                                    }`}
+                                style={{
+                                    cursor: 'pointer',
+                                    backgroundColor: currentView === "Sales" ? 'rgba(255, 255, 255, 0.25)' : 'transparent',
+                                    borderRadius: '4px',
+                                    border: currentView === "Sales" ? '1px solid rgba(255, 255, 255, 0.3)' : '1px solid transparent'
                                 }}
+                                onClick={() => onNavigate("Sales")}
                             >
                                 Caixa
-                            </a>
+                            </button>
                         </li>
                         <li className="nav-item">
-                            <a
-                                className="nav-link"
-                                href="#"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    onNavigate("Report"); // Navegação para Relatórios (não implementado ainda)
+                            <button
+                                className={`nav-link bg-transparent border-0 ${currentView === "Report" ? "active" : ""
+                                    }`}
+                                style={{
+                                    cursor: 'pointer',
+                                    backgroundColor: currentView === "Report" ? 'rgba(255, 255, 255, 0.25)' : 'transparent',
+                                    borderRadius: '4px',
+                                    border: currentView === "Report" ? '1px solid rgba(255, 255, 255, 0.3)' : '1px solid transparent'
                                 }}
+                                onClick={() => onNavigate("Report")}
                             >
                                 Relatório
-                            </a>
+                            </button>
                         </li>
                         <li className="nav-item">
-                            <a
-                                className="nav-link"
-                                href="#"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    onNavigate("Help"); // Navegação para Ajuda (não implementado ainda)
+                            <button
+                                className={`nav-link bg-transparent border-0 ${currentView === "Help" ? "active" : ""
+                                    }`}
+                                style={{
+                                    cursor: 'pointer',
+                                    backgroundColor: currentView === "Help" ? 'rgba(255, 255, 255, 0.25)' : 'transparent',
+                                    borderRadius: '4px',
+                                    border: currentView === "Help" ? '1px solid rgba(255, 255, 255, 0.3)' : '1px solid transparent'
                                 }}
+                                onClick={() => onNavigate("Help")}
                             >
                                 Ajuda
-                            </a>
+                            </button>
                         </li>
                     </ul>
                 </div>

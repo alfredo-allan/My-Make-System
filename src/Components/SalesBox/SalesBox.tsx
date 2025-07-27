@@ -75,7 +75,7 @@ const SalesBox: React.FC = () => {
 
 
     return (
-        <div className="container my-4">
+        <div className="container my-4" style={{ cursor: 'pointer' }}>
             <div className="card">
                 <div className="card-header">
                     <h5 className="card-title mb-0">Registro de Venda</h5>
